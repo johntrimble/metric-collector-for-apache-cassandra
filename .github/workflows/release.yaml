@@ -26,7 +26,7 @@ jobs:
             assets+=("-a" "$new_asset")
           done
       
-          hub release create "${assets[@]}" -m "v$RELEASE_VERSION" "v$RELEASE_VERSION"
+          hub release create --prerelease "${assets[@]}" -m "v$RELEASE_VERSION" "v$RELEASE_VERSION"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
