@@ -20,7 +20,10 @@ jobs:
           cd package-${RELEASE_VERSION}
           assets=()
           for asset in *.{gz,zip}; do
-            assets+=("-a" "$asset")
+            new_asset="${asset/%.tar.gz/_amd64.tar.gz}"
+            new_asset="${new_asset/%.zip/_amd64.zip}"
+            mv "$asset" "$new_asset"
+            assets+=("-a" "$new_asset")
           done
       
           hub release create "${assets[@]}" -m "v$RELEASE_VERSION" "v$RELEASE_VERSION"
